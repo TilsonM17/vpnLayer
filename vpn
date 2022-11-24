@@ -43,10 +43,13 @@ class Vpn
 
             list           :    List all available server 
             on [server]    :    connect with server  
+            status         :    Status about you connection
 EOT;
     }
 }
 
 
 
+//---------------------------------------------------------------------------------------------
 $vpn = new Vpn($argc, $argv);
+//--------------------------------------------------------------------------------------------
