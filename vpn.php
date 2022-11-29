@@ -5,12 +5,17 @@
 
 class Vpn
 {
+    /**
+     * @var array <Tkey, Vvalue>
+     * @todo Se quiser adicionar mais comandos, a esta classe, use este array
+     */
     private array $imputComands = [
         'list' => 'cyberghostvpn --traffic --country-code',
         'on' => 'sudo cyberghostvpn --traffic --country-code %s --connect',
-        'status' => 'cyberghostvpn --status'
+        'status' => 'cyberghostvpn --status',
+        'stop' => 'cyberghostvpn --stop'
     ];
-
+   
     public function __construct(int $countImputParameters, array $imputsParameters)
     {
         if ($countImputParameters == 1)
@@ -18,14 +23,9 @@ class Vpn
         else
             return $this->validateComand($imputsParameters);
     }
-
-    public function executeComand(array $imputsParameters)
-    {   
-        echo shell_exec(
-            sprintf($this->imputComands[$imputsParameters[1]], $imputsParameters[2] ?? '')
-        );
-    }
-
+    /**
+     * @param array $imputsParameters
+     */
     private function validateComand(array $imputsParameters)
     {
         if (array_key_exists($imputsParameters[1], $this->imputComands)) {
@@ -34,7 +34,18 @@ class Vpn
             return $this->promptShel();
         }
     }
-
+    /**
+     * @param array imputsParameters
+     */
+    public function executeComand(array $imputsParameters) /*: string|false|null*/
+    {
+        echo shell_exec(
+            sprintf($this->imputComands[$imputsParameters[1]], $imputsParameters[2] ?? '')
+        );
+    }
+    /**
+     * @return void
+     */
     private function promptShel(): void
     {
         echo <<<EOT
@@ -43,14 +54,12 @@ class Vpn
 
             Available arguments:
 
-            list           :    List all available server 
-            on [server]    :    connect with server  
-            status         :    Status about you connection
+            list            :    List all available server 
+            on [country]    :    connect with server  
+            status          :    Status about you connection
 EOT;
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------
 $vpn = new Vpn($argc, $argv);
