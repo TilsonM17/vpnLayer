@@ -13,7 +13,7 @@ class Vpn
         'list' => 'cyberghostvpn --traffic --country-code',
         'on' => 'sudo cyberghostvpn --traffic --country-code %s --connect',
         'status' => 'cyberghostvpn --status',
-        'stop' => 'cyberghostvpn --stop'
+        'stop' => 'sudo cyberghostvpn --stop'
     ];
    
     public function __construct(int $countImputParameters, array $imputsParameters)
