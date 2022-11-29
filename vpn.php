@@ -57,6 +57,7 @@ class Vpn
             list            :    List all available server 
             on [country]    :    connect with server  
             status          :    Status about you connection
+            stop            :    Stop connection with server
 EOT;
     }
 }
